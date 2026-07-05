@@ -14,6 +14,7 @@ export default defineNuxtConfig({
         './technical/Notifications',
         './functional/Games',
         './functional/Tilesets',
+        './functional/Maps',
     ],
     app: {
         head: {
