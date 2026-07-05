@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         './technical/PrintLayout',
         './technical/Notifications',
         './functional/Games',
+        './functional/Tilesets',
     ],
     app: {
         head: {
