@@ -3,12 +3,16 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     ssr: false,
     modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
+    pinia: {
+        storesDirs: ['./stores/**'],
+    },
     css: ['~/assets/css/main.css'],
     extends: [
         './technical/Storage',
         './technical/AiImageProviders',
         './technical/PrintLayout',
         './technical/Notifications',
+        './functional/Games',
     ],
     app: {
         head: {
