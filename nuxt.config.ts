@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     extends: [
         './technical/Storage',
         './technical/AiImageProviders',
+        './technical/PrintLayout',
     ],
     app: {
         head: {
