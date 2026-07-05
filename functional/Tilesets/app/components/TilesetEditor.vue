@@ -109,11 +109,12 @@ function onSetShape(shape: TileShape): void {
                     </div>
                 </div>
                 <button
-                    class="flex h-10 w-full items-center justify-center gap-2 rounded-[9px] border-none bg-gradient-to-br from-mf-accent to-mf-accent2 text-[13.5px] font-bold text-white shadow-[0_4px_14px_rgba(99,91,255,.35)]"
+                    class="flex h-10 w-full items-center justify-center gap-2 rounded-[9px] border-none bg-gradient-to-br from-mf-accent to-mf-accent2 text-[13.5px] font-bold text-white shadow-[0_4px_14px_rgba(99,91,255,.35)] disabled:cursor-not-allowed disabled:opacity-60"
+                    :disabled="editor.isGenerating.value"
                     @click="editor.generate"
                 >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2L12 3z" fill="#fff" /></svg>
-                    Générer
+                    {{ editor.isGenerating.value ? 'Génération…' : 'Générer' }}
                 </button>
 
                 <button
@@ -123,7 +124,7 @@ function onSetShape(shape: TileShape): void {
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" class="transition-transform" :class="ai.isOpen.value ? 'rotate-90' : 'rotate-0'">
                         <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
                     </svg>
-                    Connecter une IA d'image (Gemini / OpenAI)
+                    Connecter une IA d'image (Nano Banana / OpenAI)
                 </button>
                 <div v-if="ai.isOpen.value" class="mt-2.5 rounded-[9px] border border-[#222631] bg-[#121419] p-2.5">
                     <div class="mb-2 flex gap-1.5">
@@ -132,7 +133,7 @@ function onSetShape(shape: TileShape): void {
                             :class="ai.providerId.value === 'gemini' ? 'border-mf-accent bg-[rgba(124,122,255,.10)]' : 'border-mf-border2 bg-mf-surface'"
                             @click="ai.selectProvider('gemini')"
                         >
-                            Gemini
+                            Nano Banana
                         </button>
                         <button
                             class="h-7 flex-1 rounded-md border text-[11.5px] font-semibold text-mf-text2"
@@ -145,11 +146,16 @@ function onSetShape(shape: TileShape): void {
                     <input
                         v-model="ai.apiKey.value"
                         type="password"
-                        placeholder="Coller la clé API…"
+                        :placeholder="ai.providerId.value === 'gemini' ? 'Coller la clé API Google (Nano Banana)…' : 'Coller la clé API…'"
                         class="h-8 w-full rounded-[7px] border border-mf-border2 bg-mf-surface px-2.5 text-xs text-mf-text"
                     >
                     <div class="mt-1.5 text-[10.5px] leading-relaxed text-mf-faint">
-                        La clé reste sur ton appareil. Mode démo actif : les tuiles sont générées localement (terrains procéduraux) en attendant la connexion live.
+                        <template v-if="ai.providerId.value === 'gemini'">
+                            La clé reste sur ton appareil et n'est envoyée qu'à l'API Google. Une fois collée, chaque génération demande une tuile a Nano Banana (Gemini 2.5 Flash Image) sur le theme decrit ci-dessus ; en cas d'echec ou sans clé, retour automatique au mode démo (terrains procéduraux locaux).
+                        </template>
+                        <template v-else>
+                            La clé reste sur ton appareil. OpenAI n'est pas encore branché : les tuiles restent générées localement (terrains procéduraux).
+                        </template>
                     </div>
                 </div>
             </div>
