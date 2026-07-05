@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: #0c0d11;
+    color: #e7e9ee;
+    -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a2e38;
+    border-radius: 8px;
+    border: 2px solid #0c0d11;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #363b47;
+}
+
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+}
+
+@keyframes mf-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes mf-toast {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    12% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    88% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+
+.mf-tile-btn:hover .mf-tile-del {
+    opacity: 1;
+}
+
+.mf-row:hover {
+    background: #191c23;
+}
+
+.mf-row:hover .mf-rowact {
+    opacity: 1;
+}
+
+@media print {
+    .mf-app {
+        display: none !important;
+    }
+    .mf-print {
+        display: block !important;
+    }
+}
