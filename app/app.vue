@@ -3,6 +3,7 @@ const store = useGamesStore()
 const toast = useToast()
 const printView = usePrintView()
 const auth = useAuth()
+const authModal = useAuthModal()
 
 onMounted(() => {
     auth.init()
@@ -52,6 +53,12 @@ const showPrint = computed(() => !!store.currentGame && store.selection.type ===
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-3a2 2 0 012-2h16a2 2 0 012 2v3a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></svg>
                 Imprimer / PDF
             </button>
+            <button
+                class="flex h-8 items-center gap-1.5 rounded-lg border border-mf-border3 bg-mf-surface2 px-3.5 text-[13px] font-semibold text-mf-text"
+                @click="auth.isAuthenticated.value ? auth.signOut() : authModal.open()"
+            >
+                {{ auth.isAuthenticated.value ? 'Se déconnecter' : 'Se connecter' }}
+            </button>
         </div>
 
         <div class="flex min-h-0 flex-1">
@@ -80,6 +87,8 @@ const showPrint = computed(() => !!store.currentGame && store.selection.type ===
         >
             <span class="h-[7px] w-[7px] rounded-full bg-mf-accent" />{{ toast.message.value }}
         </div>
+
+        <AuthModal />
     </div>
 
     <div class="mf-print hidden">
