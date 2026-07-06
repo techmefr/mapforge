@@ -12,6 +12,8 @@ export default defineNuxtConfig({
         './technical/AiImageProviders',
         './technical/PrintLayout',
         './technical/Notifications',
+        './technical/Auth',
+        './technical/CloudSync',
         './functional/Games',
         './functional/Tilesets',
         './functional/Maps',
