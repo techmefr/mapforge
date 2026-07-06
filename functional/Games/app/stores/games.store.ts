@@ -63,7 +63,7 @@ function firstSelection(data: IMapForgeData): ISelection {
 }
 
 export const useGamesStore = defineStore('games', () => {
-    const { state: data, persist } = usePersistedState<IMapForgeData>('mapforge-data', () => ({
+    const { state: data, persist } = useSyncedState<IMapForgeData>('mapforge-data', () => ({
         games: [createDemoGame()],
     }))
     const selection = ref<ISelection>(firstSelection(data.value))
