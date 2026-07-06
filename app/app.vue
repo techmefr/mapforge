@@ -2,6 +2,11 @@
 const store = useGamesStore()
 const toast = useToast()
 const printView = usePrintView()
+const auth = useAuth()
+
+onMounted(() => {
+    auth.init()
+})
 
 const view = computed<'empty' | 'tileset' | 'map'>(() => {
     if (!store.currentGame || !store.selection.type) return 'empty'
